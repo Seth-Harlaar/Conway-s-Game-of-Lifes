@@ -5,7 +5,7 @@
 #define ROWS 20
 #define COLS 40
 
-void prettyPrint ( char printArray[ROWS][COLS], int tickCount) {
+void prettyPrint ( int printArray[ROWS][COLS], int tickCount) {
 
   int i, j, k;
 
@@ -20,7 +20,7 @@ void prettyPrint ( char printArray[ROWS][COLS], int tickCount) {
   for (i = 0; i < ROWS; i++) {
     printf("|");
     for (j = 0; j < COLS; j++) {
-      printf( "%c", printArray[i][j]);
+      printf( "%d", printArray[i][j]);
     }
     printf("|\n");
   }

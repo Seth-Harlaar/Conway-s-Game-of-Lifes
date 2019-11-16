@@ -5,8 +5,8 @@
 #define ROWS 20
 #define COLS 40
 
-int prettyPrint ( char printArray[ROWS][COLS], int tickCount);
-int nextGen ( char seedArray[ROWS][COLS]);
+int prettyPrint ( int printArray[ROWS][COLS], int tickCount);
+int nextGen ( int seedArray[ROWS][COLS]);
 
 int main(int argc, char *argv[]) {
   FILE *seedFile;
@@ -14,8 +14,11 @@ int main(int argc, char *argv[]) {
   int i, j;
   int ticks;
   int tickCount = 0;
+  int inter;
 
-  char seedArray[ROWS][COLS];
+  int seedArray[ROWS][COLS];
+
+
   char line[100];
   char start[10];
   char yes[] = "y\n";
@@ -43,14 +46,16 @@ int main(int argc, char *argv[]) {
 
   /* Go through the file and get the seed*/
   for (i = 0; i < ROWS; i++) {  
-    if ( fgets (line, 100, seedFile) ){
-      for (j = 0; j < COLS; j++) {
-        seedArray[i][j] = line[j];
+    if ( fgets (line, 100, seedFile) != NULL ){
+      for (j = 0; j < 40; j++) {
+        sscanf (line, "%d ", &inter );
+        seedArray[i][j] = inter;
       }
-    }     
-  }
+    }
+  }     
+  
 
-  prettyPrint( seedArray, tickCount); 
+  prettyPrint( seedArray, tickCount ); 
   printf("Start? [y or n]: ");
   fgets(start, 10, stdin);
   while ( !(strcmp ( start, yes) == 0 || strcmp ( start, no) == 0 ) ){

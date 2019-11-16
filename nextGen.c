@@ -5,10 +5,10 @@
 #define ROWS 20
 #define COLS 40
 
-int nextGen ( char seedArray[ROWS][COLS]) {
+int nextGen ( int seedArray[ROWS][COLS]) {
 
-  int changeCount;
-  int i, j;
+  int changeCount = 0;
+  int i, j, x, y;
   int xBound, yBound;
 
   char nextArray[ROWS][COLS];
