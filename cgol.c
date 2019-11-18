@@ -14,12 +14,10 @@ int main(int argc, char *argv[]) {
   int i, j;
   int ticks;
   int tickCount = 0;
-  int inter;
 
   int seedArray[ROWS][COLS];
 
 
-  char line[100];
   char start[10];
   char yes[] = "y\n";
   char no[] = "n\n";
@@ -46,16 +44,14 @@ int main(int argc, char *argv[]) {
 
   /* Go through the file and get the seed*/
   for (i = 0; i < ROWS; i++) {  
-    if ( fgets (line, 100, seedFile) != NULL ){
-      for (j = 0; j < 40; j++) {
-        sscanf (line, "%d ", &inter );
-        seedArray[i][j] = inter;
-      }
+    for (j = 0; j < COLS; j++) {
+      fscanf(seedFile, "%d", &seedArray[i][j]);
     }
   }     
+
   
 
-  prettyPrint( seedArray, tickCount ); 
+  prettyPrint( seedArray , ticks );
   printf("Start? [y or n]: ");
   fgets(start, 10, stdin);
   while ( !(strcmp ( start, yes) == 0 || strcmp ( start, no) == 0 ) ){
@@ -63,13 +59,13 @@ int main(int argc, char *argv[]) {
     fgets(start, 10, stdin);
 
   }
-  if ( strcmp ( start, no) == 0 ){
+  if ( strcmp ( start, no ) == 0 ){
     return (0);
   }
 
   while ( ticks >= 0 ) {
     nextGen ( seedArray );
-    tickCount ++;
+    tickCount++;
     ticks--;
     system ( "sleep 0.25" );
 

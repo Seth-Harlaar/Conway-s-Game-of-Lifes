@@ -5,6 +5,9 @@
 #define ROWS 20
 #define COLS 40
 
+int prettyPrint ( int printArray[ROWS][COLS], int tickCount);
+
+
 int nextGen ( int seedArray[ROWS][COLS]) {
 
   int changeCount = 0;
