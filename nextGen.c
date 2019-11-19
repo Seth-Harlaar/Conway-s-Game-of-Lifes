@@ -15,7 +15,7 @@ int nextGen ( int seedArray[ROWS][COLS]) {
   int xLowerBound, xUpperBound, yLowerBound , yUpperBound;
   int aliveCount;
 
-  int nextArray
+  int nextArray[ROWS][COLS];
 
   /* Loop through all the cords, and apply rules to each one */
   for (i = 0; i < ROWS; i++) {
@@ -50,7 +50,7 @@ int nextGen ( int seedArray[ROWS][COLS]) {
       /* x and y will be the relative cordinate to the cell focused on */
       for (y = yUpperBound; y < yLowerBound; y++) {
         for (x = xLowerBound; x < xUpperBound; x++) {  
-          if ( !(x == 1 || y == 1) ) {
+          if ( !(x == 0 || y == 0) ) {
             /* count neighbours */
             if ( seedArray[y + i][x + j] == 1){
               aliveCount ++;
@@ -64,30 +64,33 @@ int nextGen ( int seedArray[ROWS][COLS]) {
         /* therefore cell is alive, and rules hould be applies as such */
         if ( aliveCount < 2 ){
           /* cell must die */
-
+          nextArray[i][j] = 0;
+          changeCount++;
         }
         if ( aliveCount == 2 || aliveCount == 3){
           /* cell may live */
-
+          nextArray[i][j] = 1;
         }
-        if ( aliveCOunt > 3){
+        if ( aliveCount > 3){
           /* cell must die */
-
+          nextArray[i][j] = 0;
+          changeCount++;
         }
       } else if ( seedArray[i][j] == 0 ){
         /* cell is dead and only one rule applies */
         if ( aliveCount == 3 ){
           /* cell may come alive */
-        
+          nextArray[i][j] = 1;
+          changeCount++;
         } else {
           /* new cell stays dead */
-
+          nextArray[i][j] = 0;
         }
       }
     }
   }
 
-
+  prettyPrint ( nextArray, changeCount );
 
   return(changeCount);
 
