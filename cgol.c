@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
 
   
 
-  prettyPrint( seedArray , ticks );
+  prettyPrint( seedArray , tickCount );
   printf("Start? [y or n]: ");
   fgets(start, 10, stdin);
   while ( !(strcmp ( start, yes) == 0 || strcmp ( start, no) == 0 ) ){
@@ -69,7 +69,9 @@ int main(int argc, char *argv[]) {
     ticks--;
     system ( "sleep 0.25" );
 
-    if ( ticks == -1 ){
+    printf( "%d\n", seedArray[i][j] );
+
+    if ( ticks == -0 ){
       printf("Continue? [y or n]: ");
       fgets(start, 10, stdin);
       while ( !(strcmp ( start, yes) == 0 || strcmp ( start, no) == 0 ) ){
