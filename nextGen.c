@@ -10,54 +10,38 @@ int prettyPrint ( int printArray[ROWS][COLS], int tickCount);
 
 int nextGen ( int seedArray[ROWS][COLS]) {
 
+
+
   int changeCount = 0;
   int j, i, x, y;
-  int xLowerBound, xUpperBound, yLowerBound , yUpperBound;
   int aliveCount;
 
   int nextArray[ROWS][COLS];
+  int xCord;
+  int yCord;
 
   /* Loop through all the cords, and apply rules to each one */
   for (i = 0; i < ROWS; i++) {
     for (j = 0; j < COLS; j++) {
-      aliveCount = 0;      
+      aliveCount = 0;
 
       /* have to set some boundaries for the x and y values, so they don't exceed the grid*/
-      if ( i == ROWS ){
-        yUpperBound = -1;
-        yLowerBound = 0;
-      } else if ( i == 0 ){
-        yUpperBound = 0;
-        yLowerBound = 1;
-      } else {
-        yUpperBound = -1;
-        yLowerBound = 1;
-      }
-
-      if ( j == COLS ){
-        xUpperBound = 0;
-        xLowerBound = -1;
-      } else if( j == 0 ){
-        xUpperBound = 1;
-        xLowerBound = 0;
-      } else {
-        xUpperBound = 1;
-        xLowerBound = -1;
-      }
-
-
-      /* loop through all the nieghbours of the cord, and apply rules */
-      /* x and y will be the relative cordinate to the cell focused on */
-      for (y = yUpperBound; y < yLowerBound; y++) {
-        for (x = xLowerBound; x < xUpperBound; x++) {  
-          if ( !(x == 0 || y == 0) ) {
-            /* count neighbours */
-            if ( seedArray[y + i][x + j] == 1){
-              aliveCount ++;
+      for (y = -1; y < 2; y++) {
+        for (x = -1; x < 2; x++) {  
+          if ( !(x == 0 && y == 0) ) {
+            yCord = i + y;
+            xCord = j + x;
+            if ( !(xCord < 0 || xCord > 39 || yCord < 0 || yCord > 19) ){
+              /* count neighbours */
+              if ( seedArray[yCord][xCord] == 1){
+                aliveCount ++;
+              }  
             }
           }
         }
       }
+
+
 
       /* now apply rules to cells */
       if ( seedArray[i][j] == 1 ){
@@ -89,8 +73,10 @@ int nextGen ( int seedArray[ROWS][COLS]) {
       }
     }
   }
+  /* now set the seedArray equal to the nextArray */
+  prettyPrint( nextArray, changeCount );
 
-  prettyPrint ( nextArray, changeCount );
+
 
   return(changeCount);
 

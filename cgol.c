@@ -9,18 +9,20 @@ int prettyPrint ( int printArray[ROWS][COLS], int tickCount);
 int nextGen ( int seedArray[ROWS][COLS]);
 
 int main(int argc, char *argv[]) {
+  
   FILE *seedFile;
 
-  int i, j;
-  int ticks;
   int tickCount = 0;
+  int changeCount;
+  int ticks;
+  int i, j;
 
   int seedArray[ROWS][COLS];
 
 
-  char start[10];
   char yes[] = "y\n";
   char no[] = "n\n";
+  char start[10];
 
   /* check for correct # of input */
   if ( argc > 3 || argc < 1){
@@ -52,24 +54,28 @@ int main(int argc, char *argv[]) {
   
 
   prettyPrint( seedArray , tickCount );
+
   printf("Start? [y or n]: ");
   fgets(start, 10, stdin);
   while ( !(strcmp ( start, yes) == 0 || strcmp ( start, no) == 0 ) ){
     printf("Only the options yes (y) or no (n) are acceptable:");
     fgets(start, 10, stdin);
-
   }
   if ( strcmp ( start, no ) == 0 ){
     return (0);
   }
 
   while ( ticks >= 0 ) {
-    nextGen ( seedArray );
+    changeCount = nextGen ( seedArray );
+    if (changeCount == 0){
+      /* terminate the program if the nothing changes*/
+      return 0;
+    }
+
     tickCount++;
     ticks--;
+    
     system ( "sleep 0.25" );
-
-    printf( "%d\n", seedArray[i][j] );
 
     if ( ticks == -0 ){
       printf("Continue? [y or n]: ");
@@ -82,7 +88,7 @@ int main(int argc, char *argv[]) {
       if ( strcmp ( start, no) == 0 ){
         return (0);
       } else {
-        ticks += 50;
+        ticks += 1;
       }
     }
 
