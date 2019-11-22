@@ -70,7 +70,13 @@ int nextGen ( int seedArray[ROWS][COLS]) {
     }
   }
 
-  memcpy(seedArray, nextArray, 8000);
+  for (i = 0; i < ROWS; i++) {
+    for (j = 0; j < COLS; j++) {
+      seedArray[i][j] = nextArray[i][j];
+    }
+  }
+
+  printf("Number of elements: %lu \n", sizeof(nextArray) / sizeof(nextArray[0]) );
 
   return( changeCount );
 

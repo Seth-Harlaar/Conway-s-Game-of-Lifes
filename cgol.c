@@ -62,20 +62,18 @@ int main(int argc, char *argv[]) {
   }  
 
   while ( ticks >= 0 ) {
-
     changeCount = nextGen( seedArray );
 
     if (changeCount == 0){
       /* terminate the program if nothing changes*/
-      return 0;
+      exit(0);
     }
 
     tickCount++;
-    ticks -= 1;
+    ticks--;
 
-    prettyPrint( seedArray, ticks );
+    prettyPrint( seedArray, tickCount );
     
-    printf("sleep\n");
     system ("sleep 0.25");
 
     if ( ticks == 0 ){
@@ -87,9 +85,9 @@ int main(int argc, char *argv[]) {
       }
 
       if ( strcmp ( start, no) == 0 ){
-        return (0);
+        exit(0);
       } else {
-        ticks += 0;
+        ticks += 10;
       }
     }
   }
