@@ -10,10 +10,8 @@ int prettyPrint ( int printArray[ROWS][COLS], int tickCount);
 
 int nextGen ( int seedArray[ROWS][COLS]) {
 
-
-
   int changeCount = 0;
-  int j, i, x, y;
+  int i, j, x, y;
   int aliveCount;
 
   int nextArray[ROWS][COLS];
@@ -27,7 +25,7 @@ int nextGen ( int seedArray[ROWS][COLS]) {
 
       /* have to set some boundaries for the x and y values, so they don't exceed the grid*/
       for (y = -1; y < 2; y++) {
-        for (x = -1; x < 2; x++) {  
+        for (x = -1; x < 2; x++) {
           if ( !(x == 0 && y == 0) ) {
             yCord = i + y;
             xCord = j + x;
@@ -40,8 +38,6 @@ int nextGen ( int seedArray[ROWS][COLS]) {
           }
         }
       }
-
-
 
       /* now apply rules to cells */
       if ( seedArray[i][j] == 1 ){
@@ -73,11 +69,9 @@ int nextGen ( int seedArray[ROWS][COLS]) {
       }
     }
   }
-  /* now set the seedArray equal to the nextArray */
-  prettyPrint( nextArray, changeCount );
 
+  memcpy(seedArray, nextArray, 8000);
 
-
-  return(changeCount);
+  return( changeCount );
 
 }

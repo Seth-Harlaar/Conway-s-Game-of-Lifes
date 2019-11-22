@@ -6,7 +6,7 @@
 #define COLS 40
 
 int prettyPrint ( int printArray[ROWS][COLS], int tickCount);
-int nextGen ( int seedArray[ROWS][COLS]);
+int nextGen ( int seedArray[ROWS][COLS] );
 
 int main(int argc, char *argv[]) {
   
@@ -18,7 +18,6 @@ int main(int argc, char *argv[]) {
   int i, j;
 
   int seedArray[ROWS][COLS];
-
 
   char yes[] = "y\n";
   char no[] = "n\n";
@@ -43,15 +42,12 @@ int main(int argc, char *argv[]) {
     printf("file could not be found\n");
   }
 
-
   /* Go through the file and get the seed*/
   for (i = 0; i < ROWS; i++) {  
     for (j = 0; j < COLS; j++) {
       fscanf(seedFile, "%d", &seedArray[i][j]);
     }
-  }     
-
-  
+  }
 
   prettyPrint( seedArray , tickCount );
 
@@ -63,41 +59,40 @@ int main(int argc, char *argv[]) {
   }
   if ( strcmp ( start, no ) == 0 ){
     return (0);
-  }
+  }  
 
   while ( ticks >= 0 ) {
-    changeCount = nextGen ( seedArray );
+
+    changeCount = nextGen( seedArray );
+
     if (changeCount == 0){
-      /* terminate the program if the nothing changes*/
+      /* terminate the program if nothing changes*/
       return 0;
     }
 
     tickCount++;
-    ticks--;
-    
-    system ( "sleep 0.25" );
+    ticks -= 1;
 
-    if ( ticks == -0 ){
+    prettyPrint( seedArray, ticks );
+    
+    printf("sleep\n");
+    system ("sleep 0.25");
+
+    if ( ticks == 0 ){
       printf("Continue? [y or n]: ");
       fgets(start, 10, stdin);
       while ( !(strcmp ( start, yes) == 0 || strcmp ( start, no) == 0 ) ){
         printf("Only the options yes (y) or no (n) are acceptable:");
         fgets(start, 10, stdin);
-
       }
+
       if ( strcmp ( start, no) == 0 ){
         return (0);
       } else {
-        ticks += 1;
+        ticks += 0;
       }
     }
-
   }
-
-
-
-
-
 
   return 0;
 }

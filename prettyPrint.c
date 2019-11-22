@@ -9,9 +9,7 @@ void prettyPrint ( int printArray[ROWS][COLS], int tickCount) {
 
   int i, j, k;
 
-  system( "clear" );
-
-/* This shit prints out the seed in fancy way */
+  /* This prints out the seed in fancy way */
   for (k = 0; k < COLS + 2; k++) {
     printf("-");
   }
@@ -20,7 +18,11 @@ void prettyPrint ( int printArray[ROWS][COLS], int tickCount) {
   for (i = 0; i < ROWS; i++) {
     printf("|");
     for (j = 0; j < COLS; j++) {
-      printf( "%d", printArray[i][j]);
+      if (printArray[i][j] == 1){
+        printf( "X" );
+      } else if (printArray[i][j] == 0){
+        printf( " " );
+      }
     }
     printf("|\n");
   }
