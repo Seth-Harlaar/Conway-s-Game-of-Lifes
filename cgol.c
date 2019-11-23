@@ -13,8 +13,9 @@ int main(int argc, char *argv[]) {
   FILE *seedFile;
 
   int tickCount = 0;
-  int changeCount;
   int ticks;
+  int tickCountCont;
+  int changeCount;
   int i, j;
 
   int seedArray[ROWS][COLS];
@@ -28,10 +29,11 @@ int main(int argc, char *argv[]) {
     printf("incorrect input \n");
   } else if (argc  == 3) {
     /* Get the tickCount */
-    ticks = atoi(argv[2]);    
+    ticks = atoi(argv[2]);
   } else {
     ticks = 50;
   }
+  tickCountCont = ticks;   
   
   /* get the file name */
   seedFile = fopen(argv[1], "r");
@@ -87,7 +89,7 @@ int main(int argc, char *argv[]) {
       if ( strcmp ( start, no) == 0 ){
         exit(0);
       } else {
-        ticks += 10;
+        ticks += tickCountCont;
       }
     }
   }
