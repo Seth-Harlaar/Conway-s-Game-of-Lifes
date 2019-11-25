@@ -38,10 +38,9 @@ int main(int argc, char *argv[]) {
   /* get the file name */
   seedFile = fopen(argv[1], "r");
 
-  if (seedFile != NULL){
-    printf("open success\n");
-  } else {
+  if (seedFile == NULL){
     printf("file could not be found\n");
+    return(0);
   }
 
   /* Go through the file and get the seed*/

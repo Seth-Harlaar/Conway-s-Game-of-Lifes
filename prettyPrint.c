@@ -9,6 +9,8 @@ void prettyPrint ( int printArray[ROWS][COLS], int tickCount) {
 
   int i, j, k;
 
+  system("clear");
+  
   /* This prints out the seed in fancy way */
   for (k = 0; k < COLS + 2; k++) {
     printf("-");

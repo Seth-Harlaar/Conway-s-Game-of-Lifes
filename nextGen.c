@@ -76,8 +76,6 @@ int nextGen ( int seedArray[ROWS][COLS]) {
     }
   }
 
-  printf("Number of elements: %lu \n", sizeof(nextArray) / sizeof(nextArray[0]) );
-
   return( changeCount );
 
 }
